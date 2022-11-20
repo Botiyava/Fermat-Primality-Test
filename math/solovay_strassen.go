@@ -1,13 +1,8 @@
 package math
 
-import (
-	"math/rand"
-)
+import "math/rand"
 
-// PrimaryTest checks if number p is prime.
-// If output of the command is true it means that
-// p is a prime number with probability of 1/2^k
-func PrimaryTest(p, k int) bool {
+func SolovayStrassenTest(p, k int) bool {
 	// p - given number to check
 	// k - number of experiments
 
@@ -20,7 +15,9 @@ func PrimaryTest(p, k int) bool {
 
 	for i := 0; i < k; i++ {
 		a := rand.Intn(p-2) + 1
-		if calculateResidual(a, p-1, p) != 1 {
+		jacobySymbol := (p + calculateJacobySymbol(a, p)) % p
+		mod := calculateResidual(a, (p-1)/2, p)
+		if jacobySymbol == 0 || mod != jacobySymbol {
 			return false
 		}
 	}
