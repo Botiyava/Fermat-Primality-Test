@@ -20,7 +20,6 @@ func PrimaryTest(p, k int) bool {
 
 	for i := 0; i < k; i++ {
 		a := rand.Intn(p-2) + 1
-		//fmt.Println(a)
 		if calculateResidual(a, p-1, p) != 1 {
 			return false
 		}
